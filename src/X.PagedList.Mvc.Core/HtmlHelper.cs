@@ -301,10 +301,10 @@ namespace X.PagedList.Mvc.Core
             }
 
 
-            StringBuilder sb_go = new StringBuilder();
-            sb_go.Append("<div class='input-group col-md-2'><input type='number' class='form-control'>");
-            sb_go.Append(string.Format(@"<span class='input-group-btn'> <button type='button' class='btn btn-primary'>跳转
-                                        </button ></span></div>"));
+            //StringBuilder sb_go = new StringBuilder();
+            //sb_go.Append("<div class='col-md-2' style='margin: 20px 0;'><div class='input-group'><input type='number' class='form-control'>");
+            //sb_go.Append(string.Format(@"<span class='input-group-btn'> <button type='button' class='btn btn-primary'>跳转
+            //                            </button ></span></div></div>"));
 
 
 
@@ -316,7 +316,7 @@ namespace X.PagedList.Mvc.Core
             }
 
             AppendHtml(outerDiv, TagBuilderToString(ul));
-            AppendHtml(outerDiv, sb_go.ToString());
+         //   AppendHtml(outerDiv, sb_go.ToString());
             string s = TagBuilderToString(outerDiv);
             return new HtmlString(s);
         }

@@ -21,7 +21,7 @@
 @Html.PagedListPager((IPagedList)ViewBag.Names, page => Url.Action("GetOnePageOfNames", new { page }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
         new PagedListRenderOptions {
-            MaximumPageNumbersToDisplay = 10,
+            MaximumPageNumbersToDisplay = 20,
 
             DisplayPageCountAndCurrentLocation = true,
 

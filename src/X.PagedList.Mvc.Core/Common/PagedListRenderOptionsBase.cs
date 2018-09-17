@@ -26,7 +26,7 @@ namespace X.PagedList.Mvc.Common
             LinkToIndividualPageFormat = "{0}";
             LinkToNextPageFormat = "下一页";
             LinkToLastPageFormat = "尾页";
-            PageCountAndCurrentLocationFormat = "共{1}页.";
+            PageCountAndCurrentLocationFormat = "共{1}页";
             ItemSliceAndTotalFormat = "Showing items {0} through {1} of {2}.";
             FunctionToDisplayEachPageNumber = null;
             ClassToApplyToFirstListItemInPager = null;
