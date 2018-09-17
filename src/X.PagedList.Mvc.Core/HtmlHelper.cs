@@ -96,14 +96,18 @@ namespace X.PagedList.Mvc.Core
             var format = options.FunctionToDisplayEachPageNumber
                 ?? (pageNumber => string.Format(options.LinkToIndividualPageFormat, pageNumber));
             var targetPageNumber = i;
-            var page = i == list.PageNumber ? new TagBuilder("span") : new TagBuilder("a");
+            var page = i == list.PageNumber ? new TagBuilder("a") : new TagBuilder("a");
             SetInnerText(page, format(targetPageNumber));
 
             foreach (var c in options.PageClasses ?? Enumerable.Empty<string>())
                 page.AddCssClass(c);
 
             if (i == list.PageNumber)
+            {
+                //当前页的html生成
+                page.Attributes["href"] = generatePageUrl(targetPageNumber);
                 return WrapInListItem(page, options, options.ActiveLiElementClass);
+            }
 
             page.Attributes["href"] = generatePageUrl(targetPageNumber);
 

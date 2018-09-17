@@ -108,7 +108,7 @@ namespace X.PagedList.Mvc
             var format = options.FunctionToDisplayEachPageNumber
                 ?? (pageNumber => string.Format(options.LinkToIndividualPageFormat, pageNumber));
             var targetPageNumber = i;
-            var page = i == list.PageNumber ? new TagBuilder("span") : new TagBuilder("a");
+            var page = i == list.PageNumber ? new TagBuilder("a") : new TagBuilder("a");
             SetInnerText(page, format(targetPageNumber));
 
             foreach (var c in options.PageClasses ?? Enumerable.Empty<string>())

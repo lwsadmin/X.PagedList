@@ -30,7 +30,9 @@ namespace X.PagedList.Mvc
                     var liClass = liTagBuilder.Attributes.ContainsKey("class")
                         ? liTagBuilder.Attributes["class"] ?? ""
                         : "";
-                    if (ajaxOptions != null && !liClass.Contains("disabled") && !liClass.Contains("active"))
+
+                    // && !liClass.Contains("active") Éú³Éactive html±êÇ©
+                    if (ajaxOptions != null && !liClass.Contains("disabled"))
                     {
                         foreach (var ajaxOption in ajaxOptions.ToUnobtrusiveHtmlAttributes())
                             aTagBuilder.Attributes.Add(ajaxOption.Key, ajaxOption.Value.ToString());
