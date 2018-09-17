@@ -42,6 +42,7 @@ namespace X.PagedList
                 throw new ArgumentOutOfRangeException($"pageSize = {pageSize}. PageSize cannot be less than 1.");
             }
 
+
             // set source to blank list if superset is null to prevent exceptions
             TotalItemCount = totalItemCount;
 

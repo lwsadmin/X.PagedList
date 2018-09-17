@@ -300,12 +300,25 @@ namespace X.PagedList.Mvc.Core
                     ul.MergeAttribute(c.Key, c.Value);
             }
 
+
+            StringBuilder sb_go = new StringBuilder();
+            sb_go.Append("<div class='input-group col-md-2'><input type='number' class='form-control'>");
+            sb_go.Append(string.Format(@"<span class='input-group-btn'> <button type='button' class='btn btn-primary'>跳转
+                                        </button ></span></div>"));
+
+
+
+
             var outerDiv = new TagBuilder("div");
             foreach (var c in options.ContainerDivClasses ?? Enumerable.Empty<string>())
+            {
                 outerDiv.AddCssClass(c);
-            AppendHtml(outerDiv, TagBuilderToString(ul));
+            }
 
-            return new HtmlString(TagBuilderToString(outerDiv));
+            AppendHtml(outerDiv, TagBuilderToString(ul));
+            AppendHtml(outerDiv, sb_go.ToString());
+            string s = TagBuilderToString(outerDiv);
+            return new HtmlString(s);
         }
 
         ///<summary>

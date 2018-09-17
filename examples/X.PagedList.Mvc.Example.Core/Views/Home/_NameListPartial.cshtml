@@ -2,6 +2,7 @@
 @model IPagedList<string>
 @*import this so we get our HTML Helper*@
 @using X.PagedList.Mvc.Core;
+@using X.PagedList.Mvc.Common;
 
 @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 @using X.PagedList;
@@ -26,10 +27,24 @@
 
             UlElementClasses = new[] { "pagination" },
             ContainerDivClasses = new[] { "pagination-container" } },
-        new AjaxOptions() { DataForm= "searchForm", OnBegin= "return Begin(this);", HttpMethod = "GET", UpdateTargetId = "nameListContainer"}))
+        new AjaxOptions() { DataForm = "searchForm", OnBegin = "return Begin(this);", HttpMethod = "GET", UpdateTargetId = "nameListContainer" }))
+
+@{new GoToFormRenderOptions()
+    {
+        InputFieldClass = "form-control",
+        InputWidth = 300,
+        SubmitButtonClass = "btn",
+        SubmitButtonWidth = 100
+    };}
 <script>
 
     function Begin(obj) {
         return true;
     }
 </script>
+@Html.PagedListGoToPageForm((IPagedList)ViewBag.Names, Url.Action("Index"),
+    new GoToFormRenderOptions { InputFieldClass = "form-control",
+        InputWidth = 300, SubmitButtonClass = "btn",
+        SubmitButtonWidth = 100 })
+
+
