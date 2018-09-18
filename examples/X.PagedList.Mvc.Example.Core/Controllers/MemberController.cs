@@ -10,7 +10,7 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
     {
         private DataSet ExecuteDataSet(string sql, params object[] parameters)
         {
-            string connectionString = "Server=localhost; Database=Sjlm; Trusted_Connection=True;";
+            string connectionString = "Server=localhost; Database=BaiMeng2.0; Trusted_Connection=True;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -31,7 +31,7 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
 
             DataSet ds = ExecuteDataSet("select m.Name from tmember m where name!=''", null);
 
-            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10);
+            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10,100000);
             ViewBag.Names = pageList;
 
             return View();
@@ -49,9 +49,7 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
             DataSet ds = ExecuteDataSet(sql, null);
 
 
-            PagedList<DataRow> pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10);
-            pageList.TotalItemCount = 1000;
-            pageList.PageCount = 1000 / 10;
+            PagedList<DataRow> pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10,12000);
             ViewBag.Names = pageList;
             return PartialView("_Table", pageList);
         }

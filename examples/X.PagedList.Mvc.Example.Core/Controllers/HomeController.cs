@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Data;
-using System.Data;
 using System.Data.SqlTypes;
 using System.Data.SqlClient;
 namespace X.PagedList.Mvc.Example.Core.Controllers

@@ -88,13 +88,21 @@ namespace X.PagedList
         /// <param name="pageSize">The maximum size of any individual subset.</param>
         /// <exception cref="ArgumentOutOfRangeException">The specified index cannot be less than zero.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The specified page size cannot be less than one.</exception>
-        public PagedList(IEnumerable<T> superset, int pageNumber, int pageSize,int TotalItemCount)
+        public PagedList(IEnumerable<T> superset, int pageNumber, int pageSize)
             : this(superset.AsQueryable<T>(), pageNumber, pageSize)
+        {
+
+        }
+        public PagedList(IEnumerable<T> superset, int pageNumber, int pageSize, int TotalItemCount)
+    : this(superset.AsQueryable<T>(), pageNumber, pageSize)
         {
             this.TotalItemCount = TotalItemCount;
             this.PageCount = TotalItemCount / pageSize;
+            if (TotalItemCount % pageSize > 0)
+            {
+                this.PageCount += 1;
+            }
         }
-
         /// <summary>
         /// For Clone PagedList
         /// </summary>
