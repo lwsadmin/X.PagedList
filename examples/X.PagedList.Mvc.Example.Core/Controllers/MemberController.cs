@@ -40,7 +40,7 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
         public IActionResult Table(int page = 1, string name = "")
         {
             string sql = $"select m.Name from tmember m where name!='{name}'";
-            
+
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -50,6 +50,8 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
 
 
             PagedList<DataRow> pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10);
+            pageList.TotalItemCount = 1000;
+            pageList.PageCount = 1000 / 10;
             ViewBag.Names = pageList;
             return PartialView("_Table", pageList);
         }

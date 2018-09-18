@@ -44,7 +44,7 @@ namespace X.PagedList
 		/// <value>
 		/// Total number of subsets within the superset.
 		/// </value>
-		int PageCount { get; }
+		int PageCount { get; set; }
 
 		/// <summary>
 		/// Total number of objects contained within the superset.
@@ -52,7 +52,7 @@ namespace X.PagedList
 		/// <value>
 		/// Total number of objects contained within the superset.
 		/// </value>
-		int TotalItemCount { get; }
+		int TotalItemCount { get; set; }
 
 		/// <summary>
 		/// One-based index of this subset within the superset.
@@ -68,7 +68,7 @@ namespace X.PagedList
 		/// <value>
 		/// Maximum size any individual subset.
 		/// </value>
-		int PageSize { get; }
+		int PageSize { get; set; }
 
 		/// <summary>
 		/// Returns true if this is NOT the first subset within the superset.
