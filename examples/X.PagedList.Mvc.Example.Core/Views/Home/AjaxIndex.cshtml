@@ -4,7 +4,12 @@
 @using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 <!-- loop through each of your products and display it however you want. we're just printing the name here -->
 <h2>List of Products</h2>
-<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css"
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+<style>
+    .pagination{
+        width:auto !important;
+    }
+</style>
 <form id="searchForm" data-ajax="true" data-ajax-update="#nameListContainer" action="/home/GetOnePageOfNames" method="post">
 
     <input type="text" name="title" value="" />

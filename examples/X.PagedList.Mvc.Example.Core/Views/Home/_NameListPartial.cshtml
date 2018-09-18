@@ -21,30 +21,25 @@
 @Html.PagedListPager((IPagedList)ViewBag.Names, page => Url.Action("GetOnePageOfNames", new { page }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
         new PagedListRenderOptions {
-            MaximumPageNumbersToDisplay = 20,
-
+            MaximumPageNumbersToDisplay = 8,
             DisplayPageCountAndCurrentLocation = true,
+            UlElementClasses = new[] { "pagination col-md-8" },
+            ContainerDivClasses = new[] { "row" } },
+        new AjaxOptions()
+        {
+            DataForm = "searchForm",
+            OnBegin = "return Begin(this);",
+            HttpMethod = "GET",
+            UpdateTargetId = "nameListContainer"
+        }
+))
 
-            UlElementClasses = new[] { "pagination" },
-            ContainerDivClasses = new[] { "pagination-container" } },
-        new AjaxOptions() { DataForm = "searchForm", OnBegin = "return Begin(this);", HttpMethod = "GET", UpdateTargetId = "nameListContainer" }))
-
-@{new GoToFormRenderOptions()
-    {
-        InputFieldClass = "form-control",
-        InputWidth = 300,
-        SubmitButtonClass = "btn",
-        SubmitButtonWidth = 100
-    };}
 <script>
 
     function Begin(obj) {
         return true;
     }
 </script>
-@Html.PagedListGoToPageForm((IPagedList)ViewBag.Names, Url.Action("Index"),
-    new GoToFormRenderOptions { InputFieldClass = "form-control",
-        InputWidth = 300, SubmitButtonClass = "btn",
-        SubmitButtonWidth = 100 })
+
 
 

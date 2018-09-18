@@ -134,7 +134,7 @@
         evt.preventDefault();
         var cData = [];
         var form = this.getAttribute("data-ajax-form");
-        debugger;
+
         if (form != undefined && form != null && form!="") {
             cData = $("#" + form).serializeArray();
         }
@@ -189,4 +189,16 @@
             data: clickInfo.concat($(this).serializeArray())
         });
     });
+
 }(jQuery));
+function GoPage(btn) {
+    var input_page = $(btn).parent().siblings("input[type='number']").val();
+    if (input_page == "0")
+        input_page = "1";
+    if (parseInt(input_page) > parseInt($(btn).parent().siblings("input[type='number']").attr("max"))) {
+        input_page = $(btn).parent().siblings("input[type='number']").attr("max");
+    }
+    var href = $(".active a").attr("href");
+    var html = $(".active a").html();
+    $(".active a").attr("href", href.replace(html, input_page)).click();
+}

@@ -1,13 +1,14 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
+using System.Text;
 using X.PagedList.Mvc.Common;
 
 namespace X.PagedList.Mvc.Core
 {
-	///<summary>
-	/// Options for configuring the output of <see cref = "X.PagedList.Mvc.Core.HtmlHelper" />
-	///</summary>
-	public class PagedListRenderOptions : PagedListRenderOptionsBase
+    ///<summary>
+    /// Options for configuring the output of <see cref = "X.PagedList.Mvc.Core.HtmlHelper" />
+    ///</summary>
+    public class PagedListRenderOptions : PagedListRenderOptionsBase
     {
 
         /// <summary>
@@ -23,8 +24,10 @@ namespace X.PagedList.Mvc.Core
         /// <returns>The PagedListRenderOptionsBase value passed in, with unobtrusive AJAX attributes added to the page links.</returns>
         public static PagedListRenderOptionsBase EnableUnobtrusiveAjaxReplacing(PagedListRenderOptionsBase options, AjaxOptions ajaxOptions)
         {
+           
             if (options is PagedListRenderOptions)
             {
+                options.IsAjax = true;
                 ((PagedListRenderOptions)options).FunctionToTransformEachPageLink = (liTagBuilder, aTagBuilder) =>
                  {
                      var liClass = liTagBuilder.Attributes.ContainsKey("class")
@@ -36,9 +39,13 @@ namespace X.PagedList.Mvc.Core
                          foreach (var ajaxOption in ajaxOptions.ToUnobtrusiveHtmlAttributes())
                              aTagBuilder.Attributes.Add(ajaxOption.Key, ajaxOption.Value.ToString());
                      }
+
+
                      return aTagBuilder;
                  };
             }
+
+
             return options;
         }
 

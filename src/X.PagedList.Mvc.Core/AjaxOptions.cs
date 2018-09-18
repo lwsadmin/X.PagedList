@@ -13,6 +13,10 @@ namespace X.PagedList.Mvc.Core
                 new HtmlAttribute {Key = "data-ajax-update", Value = "#" + UpdateTargetId},
                 new HtmlAttribute {Key = "data-ajax", Value = "true"}
             };
+            if (!string.IsNullOrEmpty(GoButtonId))
+            {
+                attrs.Add(new HtmlAttribute { Key = "data-ajax-form", Value = GoButtonId });
+            }
             if (!string.IsNullOrEmpty(DataForm))
             {
                 attrs.Add(new HtmlAttribute { Key = "data-ajax-form", Value = DataForm });
@@ -64,7 +68,7 @@ namespace X.PagedList.Mvc.Core
 
             return attrs;
         }
-
+        public string GoButtonId { get; set; }
         public string HttpMethod { get; set; }
         public string DataForm { get; set; }
         public InsertionMode InsertionMode { get; set; }

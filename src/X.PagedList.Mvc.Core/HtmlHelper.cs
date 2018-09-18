@@ -150,7 +150,7 @@ namespace X.PagedList.Mvc.Core
         private static TagBuilder PageCountAndLocationText(IPagedList list, PagedListRenderOptionsBase options)
         {
             var text = new TagBuilder("a");
-            SetInnerText(text, string.Format(options.PageCountAndCurrentLocationFormat, list.PageNumber, list.PageCount));
+            SetInnerText(text, string.Format(options.PageCountAndCurrentLocationFormat, list.PageNumber, list.PageCount,list.TotalItemCount));
 
             return WrapInListItem(text, options, "PagedList-pageCountAndLocation", "disabled");
         }
@@ -300,23 +300,23 @@ namespace X.PagedList.Mvc.Core
                     ul.MergeAttribute(c.Key, c.Value);
             }
 
-
-            //StringBuilder sb_go = new StringBuilder();
-            //sb_go.Append("<div class='col-md-2' style='margin: 20px 0;'><div class='input-group'><input type='number' class='form-control'>");
-            //sb_go.Append(string.Format(@"<span class='input-group-btn'> <button type='button' class='btn btn-primary'>跳转
-            //                            </button ></span></div></div>"));
-
-
-
-
             var outerDiv = new TagBuilder("div");
             foreach (var c in options.ContainerDivClasses ?? Enumerable.Empty<string>())
             {
                 outerDiv.AddCssClass(c);
             }
-
             AppendHtml(outerDiv, TagBuilderToString(ul));
-         //   AppendHtml(outerDiv, sb_go.ToString());
+            if (options.IsAjax)
+            {
+                StringBuilder sb_go = new StringBuilder();
+                sb_go.Append("<div class='col-md-2' style='margin: 20px 0;'><div class='input-group'>" +
+                    "<input type='number' min='1' max='"+ list.PageCount.ToString() + "' class='form-control' value='" + list.PageNumber.ToString() +
+                "'>");
+                sb_go.Append(string.Format(@"<span class='input-group-btn'> <button onclick='GoPage(this);' type='button' class='btn btn-primary'>跳转
+                                        </button ></span></div></div>"));
+                AppendHtml(outerDiv, sb_go.ToString());
+            }
+
             string s = TagBuilderToString(outerDiv);
             return new HtmlString(s);
         }
