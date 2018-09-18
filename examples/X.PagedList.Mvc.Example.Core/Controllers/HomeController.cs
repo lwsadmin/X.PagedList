@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-
+using System.Data;
+using System.Data;
+using System.Data.SqlTypes;
+using System.Data.SqlClient;
 namespace X.PagedList.Mvc.Example.Core.Controllers
 {
     public class HomeController : Controller
@@ -14,13 +17,22 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
         public IActionResult AjaxIndex(int page = 1)
         {
             var listPaged = GetPagedNames(page);
+         
+
+
+
+            //DataSet ds = ExecuteDataSet("select m.Name from tmember m where name!=''", null);
+
+            //IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10);
             ViewBag.Names = listPaged;
+
             return View();
         }
 
-        public IActionResult GetOnePageOfNames(int page = 1,string name="")
+        public IActionResult GetOnePageOfNames(int page = 1, string name = "")
         {
-            var listPaged = GetPagedNames(page);
+            IPagedList listPaged = GetPagedNames(page);
+
 
             ViewBag.Names = listPaged;
 
@@ -31,6 +43,7 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
         {
             return View();
         }
+
 
         private IPagedList<string> GetPagedNames(int? page)
         {

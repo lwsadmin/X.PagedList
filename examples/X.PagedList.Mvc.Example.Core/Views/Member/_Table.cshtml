@@ -1,16 +1,16 @@
 ﻿@*use this for the fake AjaxOptions since ajax helpers were dropped in .net core*@
-@model IPagedList<string>
+@model PagedList<DataRow>
 @*import this so we get our HTML Helper*@
 @using X.PagedList.Mvc.Core;
 @using X.PagedList.Mvc.Common;
-
+@using System.Data;
 @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 @using X.PagedList;
 
 <ul>
-    @foreach (var name in Model)
+    @foreach (DataRow item in Model)
     {
-        <li>@name</li>
+        <li>@item["Name"]</li>
     }
 
 
@@ -18,16 +18,16 @@
 
 
 
-@Html.PagedListPager((IPagedList)ViewBag.Names, page => Url.Action("GetOnePageOfNames", new { page }),
+@Html.PagedListPager((IPagedList)ViewBag.Names, page => Url.Action("Table", new { page }),
     PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
         new PagedListRenderOptions {
             MaximumPageNumbersToDisplay = 8,
             DisplayPageCountAndCurrentLocation = true,
-            
+
             UlElementClasses = new[] { "pagination col-md-8" },
             ContainerDivClasses = new[] { "row" } },
-          
-            
+
+
         new AjaxOptions()
         {
             DataForm = "searchForm",

@@ -38,7 +38,7 @@
 		/// <value>
 		/// 	Total number of subsets within the superset.
 		/// </value>
-		public int PageCount { get; protected set; }
+		public int PageCount { get;  set; }
 
 		/// <summary>
 		/// 	Total number of objects contained within the superset.
@@ -46,7 +46,7 @@
 		/// <value>
 		/// 	Total number of objects contained within the superset.
 		/// </value>
-		public int TotalItemCount { get; protected set; }
+		public int TotalItemCount { get;  set; }
 		
 		/// <summary>
 		/// 	One-based index of this subset within the superset.
@@ -54,7 +54,7 @@
 		/// <value>
 		/// 	One-based index of this subset within the superset.
 		/// </value>
-		public int PageNumber { get; protected set; }
+		public int PageNumber { get;  set; }
 
 		/// <summary>
 		/// 	Maximum size any individual subset.
@@ -62,7 +62,7 @@
 		/// <value>
 		/// 	Maximum size any individual subset.
 		/// </value>
-		public int PageSize { get; protected set; }
+		public int PageSize { get;  set; }
 
 		/// <summary>
 		/// 	Returns true if this is NOT the first subset within the superset.
