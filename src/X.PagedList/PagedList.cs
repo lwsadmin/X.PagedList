@@ -73,6 +73,7 @@ namespace X.PagedList
         {
             if (TotalItemCount > 0)
             {
+                base.TotalItemCount = this.TotalItemCount;
                 Subset.AddRange(pageNumber == 1
                     ? superset.Take(pageSize).ToList()
                     : superset.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList()
@@ -93,15 +94,21 @@ namespace X.PagedList
         {
 
         }
+        //直接传入TotalItemCount，当前页的数据，pageNumber，pageSize----lws修改
+        //不要把所有的数据查出来再分页，那是最愚蠢的
+        //我个人喜好用sql分页，因为对于复杂的条件查询，sql更得心应手
         public PagedList(IEnumerable<T> superset, int pageNumber, int pageSize, int TotalItemCount)
-    : this(superset.AsQueryable<T>(), pageNumber, pageSize)
+    : base(pageNumber, pageSize, TotalItemCount)
         {
             this.TotalItemCount = TotalItemCount;
+            //this.
             this.PageCount = TotalItemCount / pageSize;
             if (TotalItemCount % pageSize > 0)
             {
                 this.PageCount += 1;
             }
+            superset.AsQueryable<T>();
+            Subset.AddRange(superset.ToList());
         }
         /// <summary>
         /// For Clone PagedList
