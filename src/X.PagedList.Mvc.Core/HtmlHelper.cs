@@ -312,7 +312,7 @@ namespace X.PagedList.Mvc.Core
                 sb_go.Append("<div class='col-md-2' style='margin: 20px 0;'><div class='input-group'>" +
                     "<input type='number' min='1' max='"+ list.PageCount.ToString() + "' class='form-control input-sm' value='" + list.PageNumber.ToString() +
                 "'>");
-                sb_go.Append(string.Format(@"<span class='input-group-btn'> <button onclick='GoPage(this);' type='button' class='btn btn-primary btn-sm'>跳转
+                sb_go.Append(string.Format(@"<span class='input-group-btn'> <button onclick='GoPage(this);' type='button' class='btn btn-primary btn-sm'>Go
                                         </button ></span></div></div>"));
                 AppendHtml(outerDiv, sb_go.ToString());
             }
