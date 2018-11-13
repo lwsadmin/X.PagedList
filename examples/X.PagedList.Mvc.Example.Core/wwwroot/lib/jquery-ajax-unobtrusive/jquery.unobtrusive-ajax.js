@@ -56,23 +56,23 @@
             var top;
 
             switch (mode) {
-            case "BEFORE":
-                top = update.firstChild;
-                $("<div />").html(data).contents().each(function () {
-                    update.insertBefore(this, top);
-                });
-                break;
-            case "AFTER":
-                $("<div />").html(data).contents().each(function () {
-                    update.appendChild(this);
-                });
-                break;
-            case "REPLACE-WITH":
-                $(update).replaceWith(data);
-                break;
-            default:
-                $(update).html(data);
-                break;
+                case "BEFORE":
+                    top = update.firstChild;
+                    $("<div />").html(data).contents().each(function () {
+                        update.insertBefore(this, top);
+                    });
+                    break;
+                case "AFTER":
+                    $("<div />").html(data).contents().each(function () {
+                        update.appendChild(this);
+                    });
+                    break;
+                case "REPLACE-WITH":
+                    $(update).replaceWith(data);
+                    break;
+                default:
+                    $(update).html(data);
+                    break;
             }
         });
     }
@@ -135,7 +135,7 @@
         var cData = [];
         var form = this.getAttribute("data-ajax-form");
 
-        if (form != undefined && form != null && form!="") {
+        if (form != undefined && form != null && form != "") {
             cData = $("#" + form).serializeArray();
         }
         asyncRequest(this, {
@@ -193,12 +193,14 @@
 }(jQuery));
 function GoPage(btn) {
     var input_page = $(btn).parent().siblings("input[type='number']").val();
+
     if (input_page == "0")
         input_page = "1";
     if (parseInt(input_page) > parseInt($(btn).parent().siblings("input[type='number']").attr("max"))) {
         input_page = $(btn).parent().siblings("input[type='number']").attr("max");
     }
-    var href = $(".active a").attr("href");
-    var html = $(".active a").html();
-    $(".active a").attr("href", href.replace(html, input_page)).click();
+    var $a = $(btn).parents(".col-md-2").siblings(".pagination ").find(".active a");
+    var href = $a.attr("href");
+    var html = $a.html();
+    $a.attr("href", href.replace(html, input_page)).click();
 }
