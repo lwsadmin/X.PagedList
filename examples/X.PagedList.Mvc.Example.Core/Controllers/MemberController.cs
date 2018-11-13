@@ -43,10 +43,10 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
         public IActionResult AjaxList(int page = 1)
         {
 
-            string table = "select BusinessName from tbusiness ";
+            string table = "select FullName from tmember ";
             int total;
-            DataSet ds = GetPaged(page, 2, table, "", out total);
-            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 2, total);
+            DataSet ds = GetPaged(page, 10, table, "", out total);
+            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10, total);
             ViewBag.Names = pageList;
 
             return View();
@@ -54,12 +54,14 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
 
         public IActionResult Table(int page = 1, string name = "")
         {
-            string table = "select BusinessName from tbusiness ";
+            string table = "select FullName from tmember ";
+            if (!string.IsNullOrEmpty(name))
+            {
+                table += $" where FullName like '%{name}%'";
+            }
             int total;
-            DataSet ds = GetPaged(page, 2, table, "", out total);
-
-            DataRow[] s = ds.Tables[0].Select();
-            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 2, total);
+            DataSet ds = GetPaged(page, 10, table, "", out total);
+            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10, total);
             ViewBag.Names = pageList;
             return PartialView("_Table", pageList);
         }
