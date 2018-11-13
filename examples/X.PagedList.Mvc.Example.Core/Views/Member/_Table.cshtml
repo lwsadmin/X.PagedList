@@ -7,11 +7,10 @@
 @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
 @using X.PagedList;
 
-<p>@Model.Count()</p>
 <ul>
     @foreach (DataRow item in Model)
     {
-        <li>@item["BusinessName"]</li>
+        <li>@item["Name"]</li>
     }
 
 

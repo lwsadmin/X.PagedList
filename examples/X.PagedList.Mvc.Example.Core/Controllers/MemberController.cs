@@ -4,49 +4,34 @@ using System.Data;
 
 using System.Data.SqlTypes;
 using System.Data.SqlClient;
-using System;
-
 namespace X.PagedList.Mvc.Example.Core.Controllers
 {
     public class MemberController : Controller
     {
-
-        public DataSet GetPaged(int pageIndex, int pageSize, string table, string orderBy, out int total)
+        private DataSet ExecuteDataSet(string sql, params object[] parameters)
         {
-            total = 0;
-            DataSet ds = new DataSet();
-            string connectionString = "Server=localhost; Database=UnionMallDb; Trusted_Connection=True;";
-
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            string connectionString = "Server=localhost; Database=BaiMeng2.0; Trusted_Connection=True;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand comm = new SqlCommand("Global_GetPaged", conn);
-                comm.CommandTimeout = 60;
-                comm.CommandType = CommandType.StoredProcedure;
-                comm.Parameters.AddWithValue("@PageIndex", pageIndex);
-                comm.Parameters.AddWithValue("@PageSize", pageSize);
-                comm.Parameters.AddWithValue("@Table", table);
-                comm.Parameters.AddWithValue("@OrderBy", orderBy);
-                comm.Parameters.Add("@TotalCount", SqlDbType.BigInt, 10);
-                comm.Parameters["@TotalCount"].Direction = ParameterDirection.Output;
-                comm.Parameters.Add("@Descript", SqlDbType.VarChar, 500);
-                comm.Parameters["@Descript"].Direction = ParameterDirection.Output;
-                SqlDataAdapter sda = new SqlDataAdapter(comm);
-                sda.Fill(ds);
-                if (comm.Parameters["@Descript"].Value.ToString() != "successful")
-                {
-                    throw new Exception(comm.Parameters["@Descript"].Value.ToString());
-                }
-                int.TryParse(comm.Parameters["@TotalCount"].Value.ToString(), out total);
+                connection.Open();
+                SqlCommand cmd = new SqlCommand(sql, connection);
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataSet ds = new DataSet();
+                // 填充DataSet. 
+                da.Fill(ds);
+                cmd.Parameters.Clear();
+                connection.Close();
+                return ds;
+
             }
-            return ds;
+
         }
         public IActionResult AjaxList(int page = 1)
         {
 
-            string table = "select BusinessName from tbusiness ";
-            int total;
-            DataSet ds = GetPaged(page, 2, table, "", out total);
-            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 2, total);
+            DataSet ds = ExecuteDataSet("select m.Name from tmember m where name!=''", null);
+
+            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10,100000);
             ViewBag.Names = pageList;
 
             return View();
@@ -54,12 +39,17 @@ namespace X.PagedList.Mvc.Example.Core.Controllers
 
         public IActionResult Table(int page = 1, string name = "")
         {
-            string table = "select BusinessName from tbusiness ";
-            int total;
-            DataSet ds = GetPaged(page, 2, table, "", out total);
+            string sql = $"select m.Name from tmember m where name!='{name}'";
 
-            DataRow[] s = ds.Tables[0].Select();
-            IPagedList pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 2, total);
+
+            if (!string.IsNullOrEmpty(name))
+            {
+                sql += $" and name like'%{name}%'";
+            }
+            DataSet ds = ExecuteDataSet(sql, null);
+
+
+            PagedList<DataRow> pageList = new PagedList<DataRow>(ds.Tables[0].Select(), page, 10,12000);
             ViewBag.Names = pageList;
             return PartialView("_Table", pageList);
         }
