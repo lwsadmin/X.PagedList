@@ -8,10 +8,11 @@ using System.Text;
 using System.Text.Encodings.Web;
 using X.PagedList.Mvc.Common;
 
+
 namespace X.PagedList.Mvc.Core
 {
     ///<summary>
-    ///	Extension methods for generating paging controls that can operate on instances of IPagedList.
+    ///	.NetCore分页 liwenshang
     ///</summary>
     public static class HtmlHelper
     {
