@@ -12,7 +12,7 @@ using X.PagedList.Mvc.Common;
 namespace X.PagedList.Mvc.Core
 {
     ///<summary>
-    ///	.NetCore分页 liwenshang
+    ///	.NetCore分页 李文尚
     ///</summary>
     public static class HtmlHelper
     {
@@ -173,12 +173,12 @@ namespace X.PagedList.Mvc.Core
         }
 
         ///<summary>
-        ///	Displays a configurable paging control for instances of PagedList.
+        ///	显示PagedList实例的可配置分页控件.
         ///</summary>
-        ///<param name = "html">This method is meant to hook off HtmlHelper as an extension method.</param>
-        ///<param name = "list">The PagedList to use as the data source.</param>
-        ///<param name = "generatePageUrl">A function that takes the page number of the desired page and returns a URL-string that will load that page.</param>
-        ///<returns>Outputs the paging control HTML.</returns>
+        ///<param name = "html">这个方法是HtmlHelper作为一个扩展方法.</param>
+        ///<param name = "list">The PagedList的数据源 to use as the data source.</param>
+        ///<param name = "generatePageUrl">获取所需页面的页码并返回将加载该页面的url字符串的函数</param>
+        ///<returns>输出分页控件HTML</returns>
         public static HtmlString PagedListPager(this IHtmlHelper html,
                                                    IPagedList list,
                                                    Func<int, string> generatePageUrl)
@@ -187,13 +187,13 @@ namespace X.PagedList.Mvc.Core
         }
 
         ///<summary>
-        ///	Displays a configurable paging control for instances of PagedList.
+        ///	显示PagedList实例的可配置分页控件
         ///</summary>
-        ///<param name = "html">This method is meant to hook off HtmlHelper as an extension method.</param>
-        ///<param name = "list">The PagedList to use as the data source.</param>
-        ///<param name = "generatePageUrl">A function that takes the page number  of the desired page and returns a URL-string that will load that page.</param>
-        ///<param name = "options">Formatting options.</param>
-        ///<returns>Outputs the paging control HTML.</returns>
+        ///<param name = "html">这个方法是HtmlHelper作为一个扩展方法</param>
+        ///<param name = "list">PagedList的数据源</param>
+        ///<param name = "generatePageUrl">获取所需页面的页码并返回将加载该页面的url字符串的函数</param>
+        ///<param name = "options">格式化选项</param>
+        ///<returns>输出分页控件HTML</returns>
         public static HtmlString PagedListPager(this IHtmlHelper html,
                                                    IPagedList list,
                                                    Func<int, string> generatePageUrl,
@@ -323,25 +323,25 @@ namespace X.PagedList.Mvc.Core
         }
 
         ///<summary>
-        /// Displays a configurable "Go To Page:" form for instances of PagedList.
+        /// 显示跳转到某页.
         ///</summary>
-        ///<param name="html">This method is meant to hook off HtmlHelper as an extension method.</param>
-        ///<param name="list">The PagedList to use as the data source.</param>
-        ///<param name="formAction">The URL this form should submit the GET request to.</param>
-        ///<returns>Outputs the "Go To Page:" form HTML.</returns>
+        ///<param name="html">为了输出HtmlHelper作为一个扩展方法</param>
+        ///<param name="list">分页数据源.</param>
+        ///<param name="formAction">GET请求提交到的URL.</param>
+        ///<returns>输出跳转到某页.</returns>
         public static HtmlString PagedListGoToPageForm(this IHtmlHelper html, IPagedList list, string formAction)
         {
             return PagedListGoToPageForm(html, list, formAction, "page");
         }
 
         ///<summary>
-        /// Displays a configurable "Go To Page:" form for instances of PagedList.
+        /// 显示跳转到某页
         ///</summary>
-        ///<param name="html">This method is meant to hook off HtmlHelper as an extension method.</param>
-        ///<param name="list">The PagedList to use as the data source.</param>
-        ///<param name="formAction">The URL this form should submit the GET request to.</param>
+        ///<param name="html">这个方法是HtmlHelper作为一个扩展方法.</param>
+        ///<param name="list">分页的数据源</param>
+        ///<param name="formAction">GET请求提交到的URL.</param>
         ///<param name="inputFieldName">The querystring key this form should submit the new page number as.</param>
-        ///<returns>Outputs the "Go To Page:" form HTML.</returns>
+        ///<returns>输出跳转到某页.</returns>
         public static HtmlString PagedListGoToPageForm(this IHtmlHelper html,
                                                           IPagedList list,
                                                           string formAction,
@@ -351,13 +351,13 @@ namespace X.PagedList.Mvc.Core
         }
 
         ///<summary>
-        /// Displays a configurable "Go To Page:" form for instances of PagedList.
+        /// 显示跳转到某页.
         ///</summary>
-        ///<param name="html">This method is meant to hook off HtmlHelper as an extension method.</param>
-        ///<param name="list">The PagedList to use as the data source.</param>
-        ///<param name="formAction">The URL this form should submit the GET request to.</param>
-        ///<param name="options">Formatting options.</param>
-        ///<returns>Outputs the "Go To Page:" form HTML.</returns>
+        ///<param name="html">为了输出HtmlHelper作为一个扩展方法</param>
+        ///<param name="list">分页数据源.</param>
+        ///<param name="formAction">GET请求提交到的URL.</param>
+        ///<param name="options">格式化选项.</param>
+        ///<returns>输出跳转到某页.</returns>
         public static HtmlString PagedListGoToPageForm(this IHtmlHelper html,
                                                  IPagedList list,
                                                  string formAction,
